@@ -21,11 +21,3 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('relationship_app.urls')),
 ]
-
-
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
-
