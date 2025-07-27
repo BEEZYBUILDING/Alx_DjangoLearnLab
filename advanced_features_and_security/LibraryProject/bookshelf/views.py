@@ -40,6 +40,7 @@ def delete_book(request, book_id):
     book.delete()
     return render(request, 'book_list.html')
 
+
 @permission_required('bookshelf.can_view', raise_exception=True)
 def view_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
