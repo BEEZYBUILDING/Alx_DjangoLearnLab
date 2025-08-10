@@ -3,7 +3,7 @@ from rest_framework import serializers
 from models import Author, Book
 import datetime
 
-class BookSerializer(serializers.Modelserializer): # serializer for the book model
+class BookSerializer(serializers.ModelSerializer): # serializer for the book model
     class Meta:
         model = Book
         fields = '__all__' #this serializes all fields without needing to mention them individually
@@ -20,7 +20,7 @@ class BookSerializer(serializers.Modelserializer): # serializer for the book mod
 # It includes:
 #   - The author's name.
 #   - A nested list of the author's books, serialized using BookSerializer.        
-class AuthorSerializer(serializers.Modelserializer): #serializer for the Author model
+class AuthorSerializer(serializers.ModelSerializer): #serializer for the Author model
     class Meta:
         book = BookSerializer(many=True, read_only=True)
         
