@@ -16,7 +16,7 @@ class ListView(generics.ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     
      # Filtering, Searching, Ordering backends
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
 
     # Fields available for filtering
     filterset_fields = ['title', 'author__name', 'publication_year']
