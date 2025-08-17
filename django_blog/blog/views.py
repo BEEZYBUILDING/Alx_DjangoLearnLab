@@ -28,6 +28,21 @@ class PostDetailView(DetailView):
             comment.save()
             return redirect("post-detail", pk=self.object.pk)
         return self.get(request, *args, **kwargs)
+    
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comment_post_detail.html'
+
+    def form_valid(self, form):
+        # Automatically associate the comment with the correct post and author
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        form.instance.post = post
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.object.post.get_absolute_url()
 
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
